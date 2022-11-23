@@ -5,7 +5,13 @@
 }
 
 body {
-  background-image: url(https://source.unsplash.com/random/?3d-renders,black,solid);
+  /* https://css-tricks.com/perfect-full-page-background-image/ */
+  background: url(https://source.unsplash.com/random/?3d-renders,black,solid)
+    no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .container {
