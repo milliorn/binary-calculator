@@ -1,37 +1,39 @@
+import { useState } from "react";
 import "./App.css";
 
 function App() {
+  const [displayValue, setDisplayValue] = useState("0");
+  const [firstOperand, setFirstOperand] = useState(null);
+
   const calculator = {
-    displayValue: "0",
-    firstOperand: null,
     operator: null,
     waitForSecondOperand: false,
   };
 
   function updateDisplay() {
     const el = document.querySelector(".screen");
-    el.value = calculator.displayValue;
+    el.value = displayValue;
   }
 
   // calculate logic
-  function calculate(firstOperand, secondOperand, operator) {
+  function calculate(first, second, operator) {
     switch (operator) {
       case "*":
-        return firstOperand * secondOperand;
+        return first * second;
       case "+":
-        return firstOperand + secondOperand;
+        return first + second;
       case "-":
-        return firstOperand - secondOperand;
+        return first - second;
       case "/":
-        return firstOperand / secondOperand;
+        return first / second;
       default:
-        return secondOperand;
+        return second;
     }
   }
 
   // handle operators
   function handleOperator(nextOperator) {
-    const { firstOperand, displayValue, operator } = calculator;
+    const { operator } = calculator;
     const inputValue = parseFloat(displayValue);
 
     if (operator && calculator.waitForSecondOperand) {
@@ -40,11 +42,11 @@ function App() {
     }
 
     if (firstOperand === null && !isNaN(inputValue)) {
-      calculator.firstOperand = inputValue;
+      setFirstOperand(inputValue);
     } else if (operator) {
       const result = calculate(firstOperand, inputValue, operator);
-      calculator.displayValue = `${parseFloat(result.toFixed(7))}`;
-      calculator.firstOperand = result;
+      setDisplayValue(`${parseFloat(result.toFixed(7))}`);
+      setFirstOperand(result);
     }
 
     calculator.operator = nextOperator;
@@ -54,38 +56,36 @@ function App() {
   // handles decimal
   function inputDecimal(decimal) {
     if (calculator.waitForSecondOperand) {
-      calculator.displayValue = "0.";
+      setDisplayValue("0.");
       calculator.waitForSecondOperand = false;
     }
 
     if (!calculator.displayValue.includes(decimal)) {
-      calculator.displayValue = decimal;
+      setDisplayValue(decimal);
     }
   }
 
   // reset display
   function resetCalculator() {
-    calculator.displayValue = "0";
-    calculator.firstOperand = null;
+    setDisplayValue("0");
+    setFirstOperand(null);
     calculator.operator = null;
     calculator.waitForSecondOperand = false;
   }
 
   // handles user input
   function inputDigit(digit) {
-    const { displayValue, waitForSecondOperand } = calculator;
+    const { waitForSecondOperand } = calculator;
 
     if (waitForSecondOperand) {
-      calculator.displayValue = digit;
+      setDisplayValue(digit);
       calculator.waitForSecondOperand = false;
     } else {
-      calculator.displayValue =
-        displayValue === "0" ? digit : displayValue + digit;
+      setDisplayValue(displayValue === "0" ? digit : displayValue + digit);
     }
   }
 
   function handleClick(event) {
-    event.preventDefault();
     const { target } = event;
 
     if (!target.matches("button")) {
@@ -108,7 +108,7 @@ function App() {
   return (
     <div className="container">
       <label>
-        <input type="text" className="screen" disabled placeholder="0" />
+        <input type="text" className="screen" disabled />
       </label>
       <div className="keys">
         <button className="operator" value="+" onClick={handleClick}>
