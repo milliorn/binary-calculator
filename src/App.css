@@ -8,20 +8,21 @@ body {
   /* https://css-tricks.com/perfect-full-page-background-image/ */
   background: url(https://source.unsplash.com/random/?3d-renders,black,solid)
     no-repeat center center fixed;
+  background-size: cover;
+  background-color: #000;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cover;
 }
 
 .container {
-  border-radius: 20px;
-  border: 1px solid #ccc;
+  border-radius: 1.5rem;
+  border: 0.063rem solid #ccc;
   left: 50%;
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 325px;
+  width: 18rem;
 }
 
 .screen {

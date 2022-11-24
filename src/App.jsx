@@ -41,7 +41,7 @@ function App() {
       setFirstOperand(inputValue);
     } else if (operator) {
       const result = calculate(firstOperand, inputValue, operator);
-      setDisplayValue(`${parseFloat(result).toFixed(9)}`);
+      setDisplayValue(`${parseFloat(result.toFixed(9))}`);
       setFirstOperand(result);
     }
 
@@ -105,60 +105,40 @@ function App() {
       <label>
         <input type="text" className="screen" disabled value={displayValue} />
       </label>
-      <div className="keys">
-        <button className="operator" value="+" onClick={handleClick}>
+      <div className="keys" onClick={handleClick}>
+        <button className="operator" value="+">
           +
         </button>
-        <button className="operator" value="-" onClick={handleClick}>
+        <button className="operator" value="-">
           &minus;
         </button>
-        <button className="operator" value="*" onClick={handleClick}>
+        <button className="operator" value="*">
           &#215;
         </button>
-        <button className="operator" value="/" onClick={handleClick}>
+        <button className="operator" value="/">
           &#247;
         </button>
 
-        <button value="7" onClick={handleClick}>
-          7
-        </button>
-        <button value="8" onClick={handleClick}>
-          8
-        </button>
-        <button value="9" onClick={handleClick}>
-          9
-        </button>
+        <button value="7">7</button>
+        <button value="8">8</button>
+        <button value="9">9</button>
 
-        <button value="4" onClick={handleClick}>
-          4
-        </button>
-        <button value="5" onClick={handleClick}>
-          5
-        </button>
-        <button value="6" onClick={handleClick}>
-          6
-        </button>
+        <button value="4">4</button>
+        <button value="5">5</button>
+        <button value="6">6</button>
 
-        <button value="1" onClick={handleClick}>
-          1
-        </button>
-        <button value="2" onClick={handleClick}>
-          2
-        </button>
-        <button value="3" onClick={handleClick}>
-          3
-        </button>
+        <button value="1">1</button>
+        <button value="2">2</button>
+        <button value="3">3</button>
 
-        <button value="0" onClick={handleClick}>
-          0
-        </button>
-        <button className="decimal" value="." onClick={handleClick}>
+        <button value="0">0</button>
+        <button className="decimal" value=".">
           .
         </button>
-        <button className="all-clear" value="all-clear" onClick={handleClick}>
+        <button className="all-clear" value="all-clear">
           &#128163;
         </button>
-        <button className="equal-sign operator" value="=" onClick={handleClick}>
+        <button className="equal-sign operator" value="=">
           =
         </button>
       </div>
