@@ -4,11 +4,8 @@ import "./App.css";
 function App() {
   const [displayValue, setDisplayValue] = useState("0");
   const [firstOperand, setFirstOperand] = useState(null);
-
-  const calculator = {
-    operator: null,
-    waitForSecondOperand: false,
-  };
+  const [operator, setOperator] = useState(null);
+  const [waitForSecondOperand, setWaitForSecondOperand] = useState(false);
 
   function updateDisplay() {
     const el = document.querySelector(".screen");
@@ -16,8 +13,8 @@ function App() {
   }
 
   // calculate logic
-  function calculate(first, second, operator) {
-    switch (operator) {
+  function calculate(first, second, op) {
+    switch (op) {
       case "*":
         return first * second;
       case "+":
@@ -33,11 +30,10 @@ function App() {
 
   // handle operators
   function handleOperator(nextOperator) {
-    const { operator } = calculator;
     const inputValue = parseFloat(displayValue);
 
-    if (operator && calculator.waitForSecondOperand) {
-      calculator.operator = nextOperator;
+    if (operator && waitForSecondOperand) {
+      setOperator(nextOperator);
       return;
     }
 
@@ -45,22 +41,22 @@ function App() {
       setFirstOperand(inputValue);
     } else if (operator) {
       const result = calculate(firstOperand, inputValue, operator);
-      setDisplayValue(`${parseFloat(result.toFixed(7))}`);
+      setDisplayValue(`${parseFloat(result).toFixed(9)}`);
       setFirstOperand(result);
     }
 
-    calculator.operator = nextOperator;
-    calculator.waitForSecondOperand = true;
+    setOperator(nextOperator);
+    setWaitForSecondOperand(true);
   }
 
   // handles decimal
   function inputDecimal(decimal) {
-    if (calculator.waitForSecondOperand) {
+    if (waitForSecondOperand) {
       setDisplayValue("0.");
-      calculator.waitForSecondOperand = false;
+      setWaitForSecondOperand(false);
     }
 
-    if (!calculator.displayValue.includes(decimal)) {
+    if (!displayValue.includes(decimal)) {
       setDisplayValue(decimal);
     }
   }
@@ -69,22 +65,21 @@ function App() {
   function resetCalculator() {
     setDisplayValue("0");
     setFirstOperand(null);
-    calculator.operator = null;
-    calculator.waitForSecondOperand = false;
+    setOperator(null);
+    setWaitForSecondOperand(false);
   }
 
   // handles user input
   function inputDigit(digit) {
-    const { waitForSecondOperand } = calculator;
-
     if (waitForSecondOperand) {
       setDisplayValue(digit);
-      calculator.waitForSecondOperand = false;
+      setWaitForSecondOperand(false);
     } else {
       setDisplayValue(displayValue === "0" ? digit : displayValue + digit);
     }
   }
 
+  // event handler for buttons
   function handleClick(event) {
     const { target } = event;
 
@@ -108,7 +103,7 @@ function App() {
   return (
     <div className="container">
       <label>
-        <input type="text" className="screen" disabled />
+        <input type="text" className="screen" disabled value={displayValue} />
       </label>
       <div className="keys">
         <button className="operator" value="+" onClick={handleClick}>
