@@ -42,8 +42,8 @@ body {
 button {
   background-color: rgba(0, 0, 0, 0.3);
   border-radius: 1.5rem;
-  border: 0.063rem solid #c4c4c4;
-  color: #f8f8f8;
+  border: 0.063rem solid #ddd;
+  color: #eee;
   font-size: 2rem;
   height: 4rem;
 }
@@ -71,7 +71,7 @@ button:active {
 
 .keys {
   display: grid;
-  grid-gap: 10px;
+  grid-gap: 0.625rem;
   grid-template-columns: repeat(4, 1fr);
-  padding: 10px;
+  padding: 0.625rem;
 }
