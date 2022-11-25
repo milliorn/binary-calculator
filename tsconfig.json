@@ -6,7 +6,10 @@
     "rootDir": "src",
     "jsx": "react-jsx",
     "moduleResolution": "node",
-    "lib": ["es6", "dom"],
+    "lib": [
+      "es6",
+      "dom"
+    ],
     "allowJs": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
@@ -22,7 +25,13 @@
     "sourceMap": true,
     "strict": true
   },
-  "include": ["src"],
-  "exclude": ["node_modules"],
-  "types": ["typePatches"]
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "types": [
+    "typePatches"
+  ]
 }
