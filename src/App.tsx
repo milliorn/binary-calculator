@@ -1,19 +1,21 @@
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 import "./App.css";
 
+// main app
 function App() {
   const [displayValue, setDisplayValue] = useState("0");
   const [firstOperand, setFirstOperand] = useState(null);
   const [operator, setOperator] = useState(null);
   const [waitForSecondOperand, setWaitForSecondOperand] = useState(false);
 
-  function updateDisplay() {
-    const el = document.querySelector(".screen");
+  // update display in screen
+  function updateDisplay(): void {
+    const el: any = document.querySelector(".screen");
     el.value = displayValue;
   }
 
   // calculate logic
-  function calculate(first, second, op) {
+  function calculate(first: number, second: number, op: string): number {
     switch (op) {
       case "*":
         return first * second;
@@ -29,8 +31,8 @@ function App() {
   }
 
   // handle operators
-  function handleOperator(nextOperator) {
-    const inputValue = parseFloat(displayValue);
+  function handleOperator(nextOperator: SetStateAction<null>) {
+    const inputValue: any = parseFloat(displayValue);
 
     if (operator && waitForSecondOperand) {
       setOperator(nextOperator);
@@ -40,9 +42,14 @@ function App() {
     if (firstOperand === null && !isNaN(inputValue)) {
       setFirstOperand(inputValue);
     } else if (operator) {
-      const result = calculate(firstOperand, inputValue, operator);
+      const result: number = calculate(
+        firstOperand as unknown as number,
+        inputValue,
+        operator
+      );
+
       setDisplayValue(`${parseFloat(result.toFixed(9))}`);
-      setFirstOperand(result);
+      setFirstOperand(result as unknown as SetStateAction<null>);
     }
 
     setOperator(nextOperator);
@@ -50,7 +57,7 @@ function App() {
   }
 
   // handles decimal
-  function inputDecimal(decimal) {
+  function inputDecimal(decimal: string): void {
     if (waitForSecondOperand) {
       setDisplayValue("0.");
       setWaitForSecondOperand(false);
@@ -62,7 +69,7 @@ function App() {
   }
 
   // reset display
-  function resetCalculator() {
+  function resetCalculator(): void {
     setDisplayValue("0");
     setFirstOperand(null);
     setOperator(null);
@@ -70,7 +77,7 @@ function App() {
   }
 
   // handles user input
-  function inputDigit(digit) {
+  function inputDigit(digit: SetStateAction<string>): void {
     if (waitForSecondOperand) {
       setDisplayValue(digit);
       setWaitForSecondOperand(false);
@@ -80,7 +87,7 @@ function App() {
   }
 
   // event handler for buttons
-  function handleClick(event) {
+  function handleClick(event: { target: any }): void {
     const { target } = event;
 
     if (!target.matches("button")) {
