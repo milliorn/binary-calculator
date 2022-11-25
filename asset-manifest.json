@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/online-binary-calculator/static/css/main.fc2f0a95.css",
+    "main.js": "/online-binary-calculator/static/js/main.9f3d9f9a.js",
+    "index.html": "/online-binary-calculator/index.html",
+    "main.fc2f0a95.css.map": "/online-binary-calculator/static/css/main.fc2f0a95.css.map",
+    "main.9f3d9f9a.js.map": "/online-binary-calculator/static/js/main.9f3d9f9a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fc2f0a95.css",
+    "static/js/main.9f3d9f9a.js"
+  ]
+}
