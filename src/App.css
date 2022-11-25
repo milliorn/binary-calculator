@@ -19,6 +19,7 @@ body {
 }
 
 .container {
+  backdrop-filter: blur(0.25rem);
   border-radius: 1.5rem;
   border: 0.063rem solid #ccc;
   left: 50%;
