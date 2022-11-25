@@ -2,16 +2,20 @@
   "name": "calculator",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://milliorn.github.io/online-binary-calculator",
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-helmet": "^6.1.0",
     "react-scripts": "5.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -35,6 +39,8 @@
     "@types/node": "^18.11.9",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.9",
+    "@types/react-helmet": "^6.1.5",
+    "gh-pages": "^4.0.0",
     "typescript": "^4.9.3"
   }
 }
